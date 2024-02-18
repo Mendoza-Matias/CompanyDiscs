@@ -1,6 +1,7 @@
 package com.record.company.com.domain.dto.artist;
 
 import com.record.company.com.domain.dto.album.AlbumDto;
+import com.record.company.com.domain.entity.Album;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

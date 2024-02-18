@@ -14,8 +14,8 @@ import java.util.List;
 @NoArgsConstructor
 public class ArtistAlbumDto {
 
-    private String nameArtist;
+    private Integer id;
 
-    private List<Album> albums;
+    private String nameArtist;
 
 }

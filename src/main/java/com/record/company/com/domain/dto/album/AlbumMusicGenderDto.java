@@ -1,6 +1,6 @@
 package com.record.company.com.domain.dto.album;
 
-import com.record.company.com.domain.entity.MusicGender;
+import com.record.company.com.domain.entity.MusicGenres;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,5 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AlbumMusicGenderDto {
 
-    private MusicGender musicGender;
+    private Integer id;
+
+    private MusicGenres musicGender;
 }

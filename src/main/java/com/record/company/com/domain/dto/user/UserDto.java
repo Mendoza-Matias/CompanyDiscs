@@ -1,6 +1,6 @@
 package com.record.company.com.domain.dto.user;
 
-import com.record.company.com.domain.entity.PrePurchase;
+import com.record.company.com.domain.entity.Purchase;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,5 +18,4 @@ public class UserDto {
 
     private String name;
 
-    private List<PrePurchase> prePurchases;
 }

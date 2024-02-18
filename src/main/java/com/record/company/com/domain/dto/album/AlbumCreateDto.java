@@ -1,6 +1,5 @@
 package com.record.company.com.domain.dto.album;
 
-import com.record.company.com.domain.entity.Artist;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,12 +13,10 @@ import java.util.Date;
 @NoArgsConstructor
 public class AlbumCreateDto {
 
-    private String titleAlbum;
-
-    private Artist artist;
+    private String nameAlbum;
 
     private int numberSongs;
 
-    private Date publicationYear;
+    private Date yearPublication;
 
 }
