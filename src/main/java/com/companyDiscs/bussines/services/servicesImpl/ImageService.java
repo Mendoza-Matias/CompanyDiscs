@@ -11,11 +11,8 @@ import java.util.Map;
 
 @Service
 public class ImageService {
-
     @Autowired
     private Cloudinary cloudinary;
-
-
     public String UploadImage(byte image , String folderName){
         String imageUrl = "";
 
@@ -28,9 +25,7 @@ public class ImageService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         return imageUrl;
-
     }
 
 }

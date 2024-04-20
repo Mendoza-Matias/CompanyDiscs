@@ -12,7 +12,7 @@ public interface ClientRepository extends JpaRepository<Client,Long> {
     @Query(value = "SELECT albums.* FROM albums INNER JOIN rel_album_client ON albums.id " +
             "= rel_album_client.album_id WHERE rel_album_client.client_id = ?1",
             nativeQuery = true)
-    Client getAlbumsOfAnClient(Long id);
+    Optional<Client> getAlbumsOfAnClient(Long id);
 
     Boolean exitsByEmail(String email);
 

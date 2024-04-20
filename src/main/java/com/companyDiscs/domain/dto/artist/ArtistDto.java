@@ -8,11 +8,14 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
 public class ArtistDto {
 
     private Long id;
 
     private String name;
+
+    private CountryDto country;
 
 }

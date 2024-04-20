@@ -11,10 +11,11 @@ public interface IAlbumService {
     List<AlbumDto> getAllAlbums();
     AlbumDto getAlbumById(Long id);
     AlbumDto getAlbumByNameArtist(String artist);
-    AlbumDto getAlbumByGender(String gender);
+    AlbumDto getAlbumByNameGender(String gender);
     AlbumDto createAlbum(Long artistId,CreateAlbumDto createAlbumDto);
     AlbumDto uploadImageAlbum(Long id , MultipartFile file);
     AlbumDto updateAlbum(Long id,CreateAlbumDto createAlbumDto);
+    AlbumDto updateArtistOfAlbum(Long id, Long artistId);
     AlbumDto deleteAlbum(Long id);
     boolean existAlbumWithName(String name);
 }

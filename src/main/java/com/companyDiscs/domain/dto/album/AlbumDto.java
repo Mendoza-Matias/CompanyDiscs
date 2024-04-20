@@ -7,10 +7,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
 public class AlbumDto {
 
@@ -24,7 +26,7 @@ public class AlbumDto {
 
     private int numberSongs;
 
-    private Date publicationDate;
+    private LocalDate publicationDate;
 
     private double price;
 

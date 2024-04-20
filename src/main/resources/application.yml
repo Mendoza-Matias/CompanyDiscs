@@ -14,9 +14,15 @@ spring:
      dd-auto: update
 
  cloudinary:
-   nameCloud:
-   apiKey:
-   apiSecret:
+   cloudName: ddc9sdc0t
+   apiKey: 391216294413794
+   apiSecret: jlEtTAb1Pnncz_5RfKmj_AByyaw
+
+#Stripe
+stripe:
+  key:
+    public: pk_test_51P6csFP4IPw0NMbLZ755j8M5ZbCMkgVwb9HTgINvI4oTW0xmvjimRTgpJN2ebiLMhoPKI4plSHhnSQZsdRvY0qL600ubxqT3j4
+    secret: sk_test_51P6csFP4IPw0NMbLTrngHqXvuup12SObrl4BC01ygxpHlOY0i9d5sXQHUF7qdhz5dYxe6pmqy5jUxqq93Arha2Sa003jVFo3dL
 
 
 

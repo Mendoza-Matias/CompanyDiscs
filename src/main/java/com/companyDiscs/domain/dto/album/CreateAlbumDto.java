@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -17,11 +18,9 @@ public class CreateAlbumDto {
 
     private String name;
 
-    private ArtistDto artist;
-
     private int numberSongs;
 
-    private Date publicationDate;
+    private LocalDate publicationDate;
 
     private double price;
 

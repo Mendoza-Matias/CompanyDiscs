@@ -7,8 +7,11 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
 public class GenderDto {
 
+    private Long id;
+    
     private String name;
 }
