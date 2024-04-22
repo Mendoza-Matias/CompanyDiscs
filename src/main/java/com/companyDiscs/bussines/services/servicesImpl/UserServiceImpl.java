@@ -4,6 +4,7 @@ import com.companyDiscs.bussines.services.IUserService;
 import com.companyDiscs.domain.dto.user.CreateUserDto;
 import com.companyDiscs.domain.dto.user.UserDto;
 import com.companyDiscs.domain.entity.User;
+import com.companyDiscs.domain.enums.Rol;
 import com.companyDiscs.exception.ClientException;
 import com.companyDiscs.exception.NotFoundException;
 import com.companyDiscs.persistence.repository.UserRepository;
@@ -44,6 +45,7 @@ public class UserServiceImpl implements IUserService {
         }
 
         User user = modelMapper.map(createUserDto,User.class);
+        user.setRol(Rol.ADMIN);
 
         return modelMapper.map(userRepository.save(user),UserDto.class);
     }
@@ -63,12 +65,12 @@ public class UserServiceImpl implements IUserService {
     @Override
     public boolean existUserWithEmail(String email) {
 
-        return userRepository.exitsByEmail(email);
+        return userRepository.existsByEmail(email);
 
     }
 
     @Override
     public boolean thereIsEmptyFilm(CreateUserDto createUserDto) {
-        return createUserDto.getName() == null || createUserDto.getEmail() == null || createUserDto.getPassword() == null;
+        return createUserDto.getUserName() == null || createUserDto.getEmail() == null || createUserDto.getPassword() == null;
     }
 }

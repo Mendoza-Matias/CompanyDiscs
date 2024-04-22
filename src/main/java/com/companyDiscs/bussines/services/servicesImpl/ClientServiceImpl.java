@@ -6,6 +6,7 @@ import com.companyDiscs.domain.dto.client.ClientAlbumDto;
 import com.companyDiscs.domain.dto.client.ClientDto;
 import com.companyDiscs.domain.dto.client.CreateClientDto;
 import com.companyDiscs.domain.entity.Client;
+import com.companyDiscs.domain.enums.Rol;
 import com.companyDiscs.exception.ClientException;
 import com.companyDiscs.exception.NotFoundException;
 import com.companyDiscs.persistence.repository.ClientRepository;
@@ -47,6 +48,7 @@ public class ClientServiceImpl implements IClientService {
         }
 
         Client client = modelMapper.map(createClientDto,Client.class);
+        client.setRol(Rol.CLIENT);
 
         return modelMapper.map(clientRepository.save(client),ClientDto.class);
     }
@@ -65,7 +67,7 @@ public class ClientServiceImpl implements IClientService {
 
     @Override
     public boolean existClientWithEmail(String email) {
-        return clientRepository.exitsByEmail(email);
+        return clientRepository.existsByEmail(email);
     }
 
     @Override

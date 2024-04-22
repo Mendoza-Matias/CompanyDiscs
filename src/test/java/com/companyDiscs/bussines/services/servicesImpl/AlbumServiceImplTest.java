@@ -87,7 +87,7 @@ class AlbumServiceImplTest {
     void getAlbumByNameArtist() {
         Album album = modelMapper.map(albumDto,Album.class);
 
-        Mockito.when(albumRepository.findByNameArtist("rick")).thenReturn(Optional.of(album));
+        Mockito.when(albumRepository.findByArtistName("rick")).thenReturn(Optional.of(album));
 
         AlbumDto service = albumServiceImpl.getAlbumByNameArtist("rick");
 
@@ -108,7 +108,7 @@ class AlbumServiceImplTest {
     void getAlbumByGender() {
         Album album = modelMapper.map(albumDto,Album.class);
 
-        Mockito.when(albumRepository.findByNameGender("pop")).thenReturn(Optional.of(album));
+        Mockito.when(albumRepository.findByGenderName("pop")).thenReturn(Optional.of(album));
 
         AlbumDto service = albumServiceImpl.getAlbumByNameGender("pop");
 

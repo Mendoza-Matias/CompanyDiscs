@@ -71,7 +71,6 @@ class ClientServiceImplTest {
                 .name("max")
                 .email("max@gmail.com")
                 .password("max1234")
-                .rol(Rol.CLIENT)
                 .build();
 
         clientDto = ClientDto
@@ -102,7 +101,7 @@ class ClientServiceImplTest {
         Client client = modelMapper.map(clientDto,Client.class);
         client.setAlbums(albums.stream().map(albDto -> modelMapper.map(albDto,Album.class)).collect(Collectors.toList()));
 
-        Mockito.when(clientRepository.getAlbumsOfAnClient(1L)).thenReturn(client);
+        Mockito.when(clientRepository.getAlbumsOfAnClient(1L)).thenReturn(Optional.of(client));
 
         ClientAlbumDto service = clientServiceImpl.getAlbumsOfAnClient(1L);
 
@@ -114,6 +113,7 @@ class ClientServiceImplTest {
     void createClient() {
 
         Client client = modelMapper.map(clientDto,Client.class);
+        client.setRol(Rol.CLIENT);
 
         Mockito.when(clientRepository.save(any(Client.class))).thenReturn(client);
 

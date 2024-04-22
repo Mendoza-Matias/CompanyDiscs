@@ -3,6 +3,7 @@ package com.companyDiscs.presentation.controller;
 import com.companyDiscs.bussines.services.IUserService;
 import com.companyDiscs.domain.dto.user.CreateUserDto;
 import com.companyDiscs.domain.dto.user.UserDto;
+import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ public class IUserController {
     ResponseEntity<UserDto> getUserById(@PathVariable(name = "id") Long id){
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(id));
     }
+    @PermitAll
     @PostMapping("create")
     ResponseEntity<UserDto> createUser(@RequestBody CreateUserDto createUserDto){
         return ResponseEntity.status(HttpStatus.OK).body(userService.createUser(createUserDto));

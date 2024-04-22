@@ -41,14 +41,15 @@ public class AlbumServiceImpl implements IAlbumService {
 
     @Override
     public AlbumDto getAlbumByNameArtist(String artist) {
-        Album album = albumRepository.findByNameArtist(artist).orElseThrow(()-> new NotFoundException("album with " + artist + " not found"));
+
+        Album album = albumRepository.findByArtistName(artist).orElseThrow(()-> new NotFoundException("album with " + artist + " not found"));
         return modelMapper.map(album,AlbumDto.class);
     }
 
     @Override
     public AlbumDto getAlbumByNameGender(String gender) {
 
-        Album album = albumRepository.findByNameGender(gender).orElseThrow(()-> new NotFoundException("album with gender " + gender + " not found"));
+        Album album = albumRepository.findByGenderName(gender).orElseThrow(()-> new NotFoundException("album with gender " + gender + " not found"));
 
         return modelMapper.map(album,AlbumDto.class);
     }
@@ -116,6 +117,6 @@ public class AlbumServiceImpl implements IAlbumService {
 
     @Override
     public boolean existAlbumWithName(String name) {
-        return albumRepository.exitsByName(name);
+        return albumRepository.existsByName(name);
     }
 }

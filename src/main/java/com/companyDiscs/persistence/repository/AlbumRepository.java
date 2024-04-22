@@ -7,7 +7,10 @@ import java.util.Optional;
 
 @Repository
 public interface AlbumRepository extends JpaRepository<Album,Long> {
-    Optional<Album> findByNameArtist(String artist);
-    Optional<Album> findByNameGender(String gender);
-    Boolean exitsByName(String name);
+
+    //search by artist name
+    Optional<Album> findByArtistName (String artist);
+    //search by gender name
+    Optional<Album> findByGenderName (String gender);
+    Boolean existsByName(String name);
 }

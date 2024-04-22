@@ -61,7 +61,7 @@ public class ArtistServiceImpl implements IArtistService {
         //set new value of artist
         artist.setName(createArtistDto.getName());
 
-        artist.setCountry(modelMapper.map(createArtistDto,Country.class));
+        artist.setCountry(modelMapper.map(createArtistDto.getCountry(),Country.class));
 
         artistRepository.save(artist);
 
@@ -70,7 +70,7 @@ public class ArtistServiceImpl implements IArtistService {
 
     @Override
     public boolean existArtistWithName(String name) {
-        return artistRepository.existByName(name);
+        return artistRepository.existsByName(name);
     }
 
     @Override

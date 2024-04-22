@@ -77,6 +77,7 @@ class ArtistServiceImplTest {
     void updateArtist() {
 
        Artist artist = modelMapper.map(artistDto,Artist.class);
+       artist.setCountry(modelMapper.map(countryDto,Country.class));
 
        CountryDto countryDto = CountryDto.builder()
                .city("lima")

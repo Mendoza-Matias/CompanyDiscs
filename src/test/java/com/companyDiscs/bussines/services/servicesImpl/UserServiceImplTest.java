@@ -45,10 +45,9 @@ class UserServiceImplTest {
                 .build();
 
         createUserDto = CreateUserDto.builder()
-                .name("jack")
+                .userName("jack")
                 .email("jack@gmail.com")
                 .password("jack12345")
-                .rol(Rol.ADMIN)
                 .build();
     }
 
@@ -56,6 +55,7 @@ class UserServiceImplTest {
     void createUser() {
 
         User user = modelMapper.map(userDto,User.class);
+        user.setRol(Rol.ADMIN);
 
         Mockito.when(userRepository.save(any(User.class))).thenReturn(user);
 

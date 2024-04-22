@@ -14,6 +14,6 @@ public interface ClientRepository extends JpaRepository<Client,Long> {
             nativeQuery = true)
     Optional<Client> getAlbumsOfAnClient(Long id);
 
-    Boolean exitsByEmail(String email);
+    Boolean existsByEmail(String email);
 
 }
