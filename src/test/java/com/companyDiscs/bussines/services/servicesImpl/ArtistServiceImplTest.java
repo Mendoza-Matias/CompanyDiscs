@@ -2,6 +2,7 @@ package com.companyDiscs.bussines.services.servicesImpl;
 
 import com.companyDiscs.domain.dto.artist.ArtistDto;
 import com.companyDiscs.domain.dto.artist.CreateArtistDto;
+import com.companyDiscs.domain.dto.artist.UpdateArtistDto;
 import com.companyDiscs.domain.dto.country.CountryDto;
 import com.companyDiscs.domain.entity.Artist;
 import com.companyDiscs.domain.entity.Country;
@@ -79,25 +80,17 @@ class ArtistServiceImplTest {
        Artist artist = modelMapper.map(artistDto,Artist.class);
        artist.setCountry(modelMapper.map(countryDto,Country.class));
 
-       CountryDto countryDto = CountryDto.builder()
-               .city("lima")
-               .location("peru")
-               .build();
-
-       CreateArtistDto createArtistDto = CreateArtistDto.
+       UpdateArtistDto updateArtistDto = UpdateArtistDto.
                builder()
                .name("jose")
-               .country(countryDto)
                .build();
 
         Mockito.when(artistRepository.findById(1L)).thenReturn(Optional.of(artist));
 
-        ArtistDto service = artistServiceImpl.updateArtist(1L,createArtistDto);
+        ArtistDto service = artistServiceImpl.updateArtist(1L,updateArtistDto);
 
+        assertEquals(1L,service.getId());
         assertEquals("jose",service.getName());
-        assertEquals("lima",service.getCountry().getCity());
-        assertEquals("peru",service.getCountry().getLocation());
-
 
     }
 }

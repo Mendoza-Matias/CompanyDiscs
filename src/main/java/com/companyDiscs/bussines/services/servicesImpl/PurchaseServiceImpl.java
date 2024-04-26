@@ -1,9 +1,11 @@
 package com.companyDiscs.bussines.services.servicesImpl;
 
 import com.companyDiscs.bussines.services.IPurchaseService;
+import com.companyDiscs.domain.dto.album.AlbumBasicInformationDto;
 import com.companyDiscs.domain.dto.album.AlbumDto;
 import com.companyDiscs.domain.dto.client.ClientDto;
 import com.companyDiscs.domain.dto.purchase.PurchaseDto;
+import com.companyDiscs.domain.dto.purchase.PurchasedAlbumOfAClientDto;
 import com.companyDiscs.domain.entity.Album;
 import com.companyDiscs.domain.entity.Client;
 import com.companyDiscs.exception.NotFoundException;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PurchaseServiceImpl implements IPurchaseService {
@@ -40,4 +43,20 @@ public class PurchaseServiceImpl implements IPurchaseService {
                 .albumDto(modelMapper.map(album, AlbumDto.class))
                 .build();
     }
+
+    @Override
+    public PurchasedAlbumOfAClientDto purchasedAlbumOfClient(Long clientId) {
+
+        Client client = clientRepository.findById(clientId).orElseThrow(()-> new NotFoundException("client not found"));
+        List<AlbumBasicInformationDto> albums = client.getAlbums().stream().map(album -> modelMapper.map(album, AlbumBasicInformationDto.class)).toList();
+
+        PurchasedAlbumOfAClientDto purchasedAlbumOfAClientDto = PurchasedAlbumOfAClientDto.
+                builder()
+                .name(client.getName())
+                .albums(albums)
+                .build();
+
+        return purchasedAlbumOfAClientDto;
+    }
+
 }

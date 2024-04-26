@@ -12,21 +12,23 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "albums")
+@Table(name = "album")
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Data
+@Getter
+@Setter
 public class Album {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Gender gender;
 
     @ManyToOne
@@ -43,14 +45,14 @@ public class Album {
     private String imageUrl;
 
     @Column(name = "price")
-    private double price;
+    private BigDecimal price;
 
     @JoinTable(
             name = "rel_album_client",
             joinColumns = @JoinColumn(name = "album_id",nullable = false),
             inverseJoinColumns = @JoinColumn(name = "client_id",nullable = false)
     )
-    @ManyToMany
+    @ManyToMany()
     private List<Client> clients;
     public void addClient(Client client){ //method
         if(this.clients == null){

@@ -5,13 +5,11 @@ spring:
    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
- server:
-   port: 8008
 
  jpa:
    database-platform: org.hibernate.dialect.MySQL8Dialect
    hibernate:
-     dd-auto: update
+     ddl-auto: update
 
  cloudinary:
    cloudName: ddc9sdc0t

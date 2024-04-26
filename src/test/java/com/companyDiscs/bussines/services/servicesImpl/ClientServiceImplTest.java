@@ -1,8 +1,7 @@
 package com.companyDiscs.bussines.services.servicesImpl;
 
 import com.companyDiscs.domain.dto.album.AlbumDto;
-import com.companyDiscs.domain.dto.artist.ArtistDto;
-import com.companyDiscs.domain.dto.client.ClientAlbumDto;
+import com.companyDiscs.domain.dto.artist.ArtistBasicInformationDto;
 import com.companyDiscs.domain.dto.client.ClientDto;
 import com.companyDiscs.domain.dto.client.CreateClientDto;
 import com.companyDiscs.domain.dto.gender.GenderDto;
@@ -10,7 +9,6 @@ import com.companyDiscs.domain.entity.Album;
 import com.companyDiscs.domain.entity.Client;
 import com.companyDiscs.domain.enums.Rol;
 import com.companyDiscs.persistence.repository.ClientRepository;
-import lombok.Data;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,10 +19,10 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import static org.mockito.Mockito.verify;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,7 +39,7 @@ class ClientServiceImplTest {
 
     private ClientAlbumDto clientAlbumDto;
 
-    private ArtistDto artistDto;
+    private ArtistBasicInformationDto artistBasicInformationDto;
 
     private GenderDto genderDto;
 
@@ -62,7 +60,7 @@ class ClientServiceImplTest {
                 .name("rock")
                 .build();
 
-        artistDto = ArtistDto.builder()
+        artistBasicInformationDto = ArtistBasicInformationDto.builder()
                 .id(1L)
                 .name("jack")
                 .build();
@@ -89,9 +87,9 @@ class ClientServiceImplTest {
                 .id(1L)
                 .name("legend")
                 .gender(genderDto)
-                .artist(artistDto)
+                .artist(artistBasicInformationDto)
                 .numberSongs(10)
-                .price(1200.00)
+                .price(new BigDecimal("12000"))
                 .imageUlr("image.png")
                 .build();
 

@@ -1,4 +1,4 @@
-package com.companyDiscs.bussines.services.servicesImpl;
+package com.companyDiscs.bussines.services.security;
 
 import com.companyDiscs.domain.dto.auth.AuthenticationRequest;
 import com.companyDiscs.domain.dto.auth.AuthenticationResponse;

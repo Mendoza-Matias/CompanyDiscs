@@ -1,5 +1,6 @@
-package com.companyDiscs.domain.dto.client;
+package com.companyDiscs.domain.dto.purchase;
 
+import com.companyDiscs.domain.dto.album.AlbumBasicInformationDto;
 import com.companyDiscs.domain.dto.album.AlbumDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,11 +11,11 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Builder
-public class ClientAlbumDto {
+@Data
+public class PurchasedAlbumOfAClientDto {
 
-    private Long id;
+    private String name;
 
-    private List<AlbumDto> albums;
+    private List<AlbumBasicInformationDto> albums;
 }

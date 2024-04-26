@@ -3,10 +3,9 @@ package com.companyDiscs.bussines.services.servicesImpl;
 import com.companyDiscs.bussines.services.IAlbumService;
 import com.companyDiscs.domain.dto.album.AlbumDto;
 import com.companyDiscs.domain.dto.album.CreateAlbumDto;
-import com.companyDiscs.domain.dto.gender.GenderDto;
+import com.companyDiscs.domain.dto.album.UpdateAlbumDto;
 import com.companyDiscs.domain.entity.Album;
 import com.companyDiscs.domain.entity.Artist;
-import com.companyDiscs.domain.entity.Gender;
 import com.companyDiscs.exception.AlbumException;
 import com.companyDiscs.exception.NotFoundException;
 import com.companyDiscs.persistence.repository.AlbumRepository;
@@ -76,15 +75,14 @@ public class AlbumServiceImpl implements IAlbumService {
     }
 
     @Override
-    public AlbumDto updateAlbum(Long id, CreateAlbumDto createAlbumDto) {
+    public AlbumDto updateAlbum(Long id, UpdateAlbumDto updateAlbumDto) {
 
         Album album = albumRepository.findById(id).orElseThrow(()-> new NotFoundException("album not found"));
 
-        album.setName(createAlbumDto.getName());
-        album.setGender(modelMapper.map(createAlbumDto.getGender(), Gender.class));
-        album.setNumberSongs(createAlbumDto.getNumberSongs());
-        album.setPublicationDate(createAlbumDto.getPublicationDate());
-        album.setPrice(createAlbumDto.getPrice());
+        album.setName(updateAlbumDto.getName());
+        album.setNumberSongs(updateAlbumDto.getNumberSongs());
+        album.setPublicationDate(updateAlbumDto.getPublicationDate());
+        album.setPrice(updateAlbumDto.getPrice());
 
         albumRepository.save(album);
 

@@ -1,5 +1,4 @@
-package com.companyDiscs.domain.dto.user;
-
+package com.companyDiscs.domain.dto.artist;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,9 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class UserDto {
+public class UpdateArtistDto {
 
-    private Long id;
+    private String name;
 
-    private String Username;
 }

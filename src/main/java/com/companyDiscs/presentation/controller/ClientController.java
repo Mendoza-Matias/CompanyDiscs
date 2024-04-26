@@ -1,7 +1,6 @@
 package com.companyDiscs.presentation.controller;
 
 import com.companyDiscs.bussines.services.IClientService;
-import com.companyDiscs.domain.dto.client.ClientAlbumDto;
 import com.companyDiscs.domain.dto.client.ClientDto;
 import com.companyDiscs.domain.dto.client.CreateClientDto;
 import jakarta.annotation.security.PermitAll;
@@ -18,13 +17,10 @@ public class ClientController {
     @Autowired
     private IClientService clientService;
 
+    @PermitAll
     @GetMapping
     ResponseEntity<List<ClientDto>> getAllClients(){
         return ResponseEntity.status(HttpStatus.OK).body(clientService.getAllClients());
-    };
-    @GetMapping("albumsOfAnClient/{id}")
-    ResponseEntity<ClientAlbumDto> getAlbumsOfAnClient(@PathVariable(name = "id") Long id){
-        return ResponseEntity.status(HttpStatus.OK).body(clientService.getAlbumsOfAnClient(id));
     };
 
     @PermitAll
@@ -32,6 +28,8 @@ public class ClientController {
     ResponseEntity<ClientDto> createClient(@RequestBody CreateClientDto createClientDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(clientService.createClient(createClientDto));
     }
+
+    @PermitAll
     @PutMapping("password/{id}")
     ResponseEntity<ClientDto> modifyPassword(@PathVariable(name = "id") Long id , @RequestBody String password){
         return ResponseEntity.status(HttpStatus.OK).body(clientService.modifyPassword(id,password));

@@ -10,6 +10,7 @@ import com.companyDiscs.exception.NotFoundException;
 import com.companyDiscs.persistence.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +22,10 @@ public class UserServiceImpl implements IUserService {
     private UserRepository userRepository;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Override
-    public List<UserDto> getAllUser() {
+    public List <UserDto> getAllUser() {
         List<User> user = userRepository.findAll();
         return user.stream().map(usr -> modelMapper.map(usr,UserDto.class)).collect(Collectors.toList());
     }
@@ -45,21 +48,24 @@ public class UserServiceImpl implements IUserService {
         }
 
         User user = modelMapper.map(createUserDto,User.class);
+        user.setPassword(passwordEncoder.encode(createUserDto.getPassword()));
         user.setRol(Rol.ADMIN);
 
         return modelMapper.map(userRepository.save(user),UserDto.class);
     }
 
     @Override
-    public void modifyPassword(Long id, String password) {
+    public UserDto modifyPassword(Long id, String password) {
 
         User user = userRepository.findById(id).orElseThrow(()-> new NotFoundException("user not found"));
 
-        user.setPassword(password);
+        user.setPassword(passwordEncoder.encode(password));
 
         userRepository.save(user);
 
         modelMapper.map(user, UserDto.class);
+
+        return modelMapper.map(user,UserDto.class);
     }
 
     @Override

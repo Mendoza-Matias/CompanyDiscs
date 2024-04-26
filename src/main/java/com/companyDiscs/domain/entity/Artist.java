@@ -4,9 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 @Entity
-@Table(name = "artists")
+@Table(name = "artist")
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,11 +15,13 @@ import lombok.NoArgsConstructor;
 @Data
 public class Artist {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "country_id")
     private Country country;
 }

@@ -9,7 +9,7 @@ public interface IUserService {
     List<UserDto> getAllUser();
     UserDto getUserById(Long id);
     UserDto createUser(CreateUserDto createUserDto);
-    void modifyPassword(Long id, String password);
+    UserDto modifyPassword(Long id, String password);
     boolean existUserWithEmail(String email);
     boolean thereIsEmptyFilm(CreateUserDto createUserDto);
 }

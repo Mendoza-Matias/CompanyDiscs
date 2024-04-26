@@ -3,6 +3,7 @@ package com.companyDiscs.bussines.services.servicesImpl;
 import com.companyDiscs.bussines.services.IArtistService;
 import com.companyDiscs.domain.dto.artist.ArtistDto;
 import com.companyDiscs.domain.dto.artist.CreateArtistDto;
+import com.companyDiscs.domain.dto.artist.UpdateArtistDto;
 import com.companyDiscs.domain.dto.country.CountryDto;
 import com.companyDiscs.domain.entity.Artist;
 import com.companyDiscs.domain.entity.Country;
@@ -54,15 +55,13 @@ public class ArtistServiceImpl implements IArtistService {
     }
 
     @Override
-    public ArtistDto updateArtist(Long id, CreateArtistDto createArtistDto){
+    public ArtistDto updateArtist(Long id, UpdateArtistDto updateArtistDto){
 
         Artist artist = artistRepository.findById(id).orElseThrow(()-> new NotFoundException("artist not found"));
 
         //set new value of artist
-        artist.setName(createArtistDto.getName());
-
-        artist.setCountry(modelMapper.map(createArtistDto.getCountry(),Country.class));
-
+        artist.setName(updateArtistDto.getName());
+        
         artistRepository.save(artist);
 
         return modelMapper.map(artist,ArtistDto.class);

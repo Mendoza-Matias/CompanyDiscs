@@ -1,8 +1,6 @@
 package com.companyDiscs.bussines.services.servicesImpl;
 
 import com.companyDiscs.bussines.services.IClientService;
-import com.companyDiscs.domain.dto.album.AlbumDto;
-import com.companyDiscs.domain.dto.client.ClientAlbumDto;
 import com.companyDiscs.domain.dto.client.ClientDto;
 import com.companyDiscs.domain.dto.client.CreateClientDto;
 import com.companyDiscs.domain.entity.Client;
@@ -12,9 +10,9 @@ import com.companyDiscs.exception.NotFoundException;
 import com.companyDiscs.persistence.repository.ClientRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,15 +23,12 @@ public class ClientServiceImpl implements IClientService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public List<ClientDto> getAllClients() {
         return clientRepository.findAll().stream().map(client -> modelMapper.map(client,ClientDto.class)).collect(Collectors.toList());
-    }
-
-    @Override
-    public ClientAlbumDto getAlbumsOfAnClient(Long id) {
-        Client client = clientRepository.getAlbumsOfAnClient(id).orElseThrow(()-> new NotFoundException("client not found"));
-        return modelMapper.map(client,ClientAlbumDto.class);
     }
 
     @Override
@@ -48,7 +43,9 @@ public class ClientServiceImpl implements IClientService {
         }
 
         Client client = modelMapper.map(createClientDto,Client.class);
+
         client.setRol(Rol.CLIENT);
+        client.setPassword(passwordEncoder.encode(createClientDto.getPassword()));
 
         return modelMapper.map(clientRepository.save(client),ClientDto.class);
     }
@@ -58,7 +55,7 @@ public class ClientServiceImpl implements IClientService {
 
         Client client = clientRepository.findById(id).orElseThrow(()-> new NotFoundException("client not found"));
 
-        client.setPassword(password);
+        client.setPassword(passwordEncoder.encode(password));
 
         clientRepository.save(client);
 

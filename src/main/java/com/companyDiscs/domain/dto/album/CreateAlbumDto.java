@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -22,7 +23,7 @@ public class CreateAlbumDto {
 
     private LocalDate publicationDate;
 
-    private double price;
+    private BigDecimal price;
 
     private GenderDto gender;
 }

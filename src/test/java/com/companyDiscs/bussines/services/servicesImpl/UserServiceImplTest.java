@@ -41,7 +41,7 @@ class UserServiceImplTest {
 
         userDto = UserDto.builder()
                 .id(1L)
-                .name("jack")
+                .Username("jack")
                 .build();
 
         createUserDto = CreateUserDto.builder()
@@ -63,7 +63,7 @@ class UserServiceImplTest {
 
         assertAll(
                 ()-> assertEquals(1L,service.getId()),
-                ()-> assertEquals("jack",service.getName())
+                ()-> assertEquals("jack",service.getUsername())
         );
     }
 

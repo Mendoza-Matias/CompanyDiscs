@@ -2,12 +2,11 @@ package com.companyDiscs.bussines.services.servicesImpl;
 
 import com.companyDiscs.domain.dto.album.AlbumDto;
 import com.companyDiscs.domain.dto.album.CreateAlbumDto;
-import com.companyDiscs.domain.dto.artist.ArtistDto;
-import com.companyDiscs.domain.dto.country.CountryDto;
+import com.companyDiscs.domain.dto.artist.ArtistBasicInformationDto;
+import com.companyDiscs.domain.dto.album.UpdateAlbumDto;
 import com.companyDiscs.domain.dto.gender.GenderDto;
 import com.companyDiscs.domain.entity.Album;
 import com.companyDiscs.domain.entity.Artist;
-import com.companyDiscs.domain.entity.Country;
 import com.companyDiscs.persistence.repository.AlbumRepository;
 import com.companyDiscs.persistence.repository.ArtistRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,9 +19,9 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.Date;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -45,7 +44,7 @@ class AlbumServiceImplTest {
 
     private AlbumDto albumDto;
 
-    private ArtistDto artistDto;
+    private ArtistBasicInformationDto artistBasicInformationDto;
 
     private CreateAlbumDto createAlbumDto;
 
@@ -58,7 +57,7 @@ class AlbumServiceImplTest {
                 .name("pop")
                 .build();
 
-        artistDto = ArtistDto.builder()
+        artistBasicInformationDto = ArtistBasicInformationDto.builder()
                 .id(1L)
                 .name("rick")
                 .build();
@@ -67,10 +66,10 @@ class AlbumServiceImplTest {
                 .id(1L)
                 .name("testing")
                 .gender(genderDto)
-                .artist(artistDto)
+                .artist(artistBasicInformationDto)
                 .numberSongs(10)
                 .publicationDate(LocalDate.of(2002, Month.DECEMBER, 19))
-                .price(12.000)
+                .price(new BigDecimal("15000"))
                 .imageUlr("image.jpg")
                 .build();
 
@@ -79,7 +78,7 @@ class AlbumServiceImplTest {
                 .gender(genderDto)
                 .numberSongs(10)
                 .publicationDate(LocalDate.of(2002, Month.DECEMBER, 19))
-                .price(12.000)
+                .price(new BigDecimal("15000"))
                 .build();
     }
 
@@ -98,7 +97,7 @@ class AlbumServiceImplTest {
                 ()-> assertEquals("rick",service.getArtist().getName()),
                 ()-> assertEquals(10,service.getNumberSongs()),
                 ()-> assertEquals(LocalDate.of(2002,Month.DECEMBER,19),service.getPublicationDate()),
-                ()-> assertEquals(12.000,service.getPrice())
+                ()-> assertEquals(new BigDecimal("15000"),service.getPrice())
                 //()-> assertEquals("image.jpg",service.getImageUlr())
         );
 
@@ -119,7 +118,7 @@ class AlbumServiceImplTest {
                 ()-> assertEquals("rick",service.getArtist().getName()),
                 ()-> assertEquals(10,service.getNumberSongs()),
                 ()-> assertEquals(LocalDate.of(2002,Month.DECEMBER,19),service.getPublicationDate()),
-                ()-> assertEquals(12.000,service.getPrice())
+                ()-> assertEquals(new BigDecimal("15000"),service.getPrice())
                 //()-> assertEquals("image.jpg",service.getImageUlr())
         );
     }
@@ -127,7 +126,7 @@ class AlbumServiceImplTest {
     @Test
     void createAlbum() {
         Album album = modelMapper.map(albumDto,Album.class);
-        Artist artist = modelMapper.map(artistDto,Artist.class);
+        Artist artist = modelMapper.map(artistBasicInformationDto,Artist.class);
 
         album.setArtist(artist);
 
@@ -144,7 +143,7 @@ class AlbumServiceImplTest {
                 ()-> assertEquals("rick",service.getArtist().getName()),
                 ()-> assertEquals(10,service.getNumberSongs()),
                 ()-> assertEquals(LocalDate.of(2002,Month.DECEMBER,19),service.getPublicationDate()),
-                ()-> assertEquals(12.000,service.getPrice())
+                ()-> assertEquals(new BigDecimal("15000"),service.getPrice())
                 //()-> assertEquals("image.jpg",service.getImageUlr())
         );
     }
@@ -155,25 +154,23 @@ class AlbumServiceImplTest {
 
         Album album = modelMapper.map(albumDto,Album.class);
 
-        CreateAlbumDto createAlbumDto = CreateAlbumDto.builder()
+       UpdateAlbumDto updateAlbumDto = UpdateAlbumDto.builder()
                 .name("updateAlbum")
-                .gender(genderDto)
                 .numberSongs(12)
                 .publicationDate(LocalDate.of(2004, Month.DECEMBER, 24))
-                .price(15000)
+                .price(new BigDecimal("15000"))
                 .build();
 
         Mockito.when(albumRepository.findById(1L)).thenReturn(Optional.of(album));
 
-        AlbumDto service = albumServiceImpl.updateAlbum(1L,createAlbumDto);
+        AlbumDto service = albumServiceImpl.updateAlbum(1L,updateAlbumDto);
 
         assertAll(
                 ()-> assertEquals(1L,service.getId()),
                 ()-> assertEquals("updateAlbum",service.getName()),
-                ()-> assertEquals("pop",service.getGender().getName()),
                 ()-> assertEquals(12,service.getNumberSongs()),
                 ()-> assertEquals(LocalDate.of(2004,Month.DECEMBER,24),service.getPublicationDate()),
-                ()-> assertEquals(15000,service.getPrice())
+                ()-> assertEquals(new BigDecimal("15000"),service.getPrice())
                 //()-> assertEquals("image.jpg",service.getImageUlr())
         );
 
@@ -182,7 +179,7 @@ class AlbumServiceImplTest {
     @Test
     void updateArtistOfAlbum() {
 
-        Artist artist = modelMapper.map(artistDto,Artist.class);
+        Artist artist = modelMapper.map(artistBasicInformationDto,Artist.class);
         artist.setName("joe");
 
         Album album = modelMapper.map(albumDto,Album.class);
